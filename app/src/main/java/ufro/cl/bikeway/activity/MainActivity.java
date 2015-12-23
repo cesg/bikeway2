@@ -45,8 +45,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(apiClient);
                 Intent homeActivity = new Intent(this, HomeActivity.class);
-                startActivity(homeActivity);
-                //startActivity(intent);
+                //startActivity(homeActivity);
+                startActivity(intent);
                 break;
         }
 
