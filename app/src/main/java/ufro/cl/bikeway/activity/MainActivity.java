@@ -15,8 +15,8 @@ import com.google.android.gms.common.api.GoogleApiClient;
 import ufro.cl.bikeway.R;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
-    private Button loginBtn;
     private GoogleApiClient apiClient;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,10 +28,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .build();
         apiClient = new GoogleApiClient.Builder(this)
                 .addApi(Auth.GOOGLE_SIGN_IN_API, gso)
-        .build();
+                .build();
 
         if (apiClient.isConnected()) {
-            Log.i("TAG", "Usuario logeado");
+            Log.i("BIKEWAY", "Usuario logeado");
         }
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
@@ -42,13 +42,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.sign_in_button:
+
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(apiClient);
-                startActivity(intent);
+                Intent homeActivity = new Intent(this, HomeActivity.class);
+                startActivity(homeActivity);
+                //startActivity(intent);
                 break;
-            //case R.id.button:
-                //Intent intent2 = new Intent(this, RutaActivity.class);
-                //startActivity(intent2);
-                //break;
         }
 
     }
