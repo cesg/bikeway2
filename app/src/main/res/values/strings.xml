@@ -5,4 +5,8 @@
     <string name="acceder">Acceder</string>
     <string name="title_activity_ruta">Ruta Map</string>
     <string name="rutamaps">RutaMaps</string>
+    <string name="nombre_ruta">Nombre Ruta</string>
+    <string name="nombre_de_ruta">Nombre de ruta</string>
+    <string name="distancia">Distancia:</string>
+    <string name="_50_metros">50 Metros</string>
 </resources>

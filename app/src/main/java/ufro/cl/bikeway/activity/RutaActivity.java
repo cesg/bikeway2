@@ -3,6 +3,7 @@ package ufro.cl.bikeway.activity;
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
+import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
@@ -22,6 +23,8 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 import ufro.cl.bikeway.R;
 
@@ -88,6 +91,24 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         }
 
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.add(new LatLng(-38.749173d,-72.617261d));
+        polylineOptions.add(new LatLng(-38.748679d,-72.616735d));
+
+        polylineOptions.add(new LatLng(-38.748926d,-72.616286d));
+        polylineOptions.add(new LatLng(-38.749085d,-72.615610d));
+
+        polylineOptions.add(new LatLng(-38.749152d,-72.615181d));
+        polylineOptions.add(new LatLng(-38.748709d,-72.614977d));
+
+        polylineOptions.add(new LatLng(-38.748282d,-72.614977d));
+        polylineOptions.add(new LatLng(-38.748023d,-72.615149d));
+
+        polylineOptions.add(new LatLng(-38.745939d,-72.613271d));
+        polylineOptions.add(new LatLng(-38.746424d,-72.611275d));
+        polylineOptions.color(Color.GREEN);
+
+        mMap.addPolyline(polylineOptions);
 
     }
 }
