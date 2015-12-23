@@ -35,11 +35,21 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
+        findViewById(R.id.button).setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        Intent intent = Auth.GoogleSignInApi.getSignInIntent(apiClient);
-        startActivity(intent);
+        switch (v.getId()) {
+            case R.id.sign_in_button:
+                Intent intent = Auth.GoogleSignInApi.getSignInIntent(apiClient);
+                startActivity(intent);
+                break;
+            case R.id.button:
+                Intent intent2 = new Intent(this, RutaActivity.class);
+                startActivity(intent2);
+                break;
+        }
+
     }
 }

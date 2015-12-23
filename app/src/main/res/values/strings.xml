@@ -3,4 +3,6 @@
     <string name="nombre">Nombre</string>
     <string name="clave">Clave</string>
     <string name="acceder">Acceder</string>
+    <string name="title_activity_ruta">Ruta Map</string>
+    <string name="rutamaps">RutaMaps</string>
 </resources>
