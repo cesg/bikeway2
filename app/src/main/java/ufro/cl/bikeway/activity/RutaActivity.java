@@ -25,11 +25,15 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.maps.android.PolyUtil;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import ufro.cl.bikeway.R;
+import ufro.cl.bikeway.Ruta;
 
-public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
-{
+public class RutaActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     public static final String TAG = RutaActivity.class.getSimpleName();
@@ -78,37 +82,25 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         Criteria criteria = new Criteria();
         String provider = locationManager.getBestProvider(criteria, true);
-        Log.w(TAG, "privider : "+ provider);
+        Log.w(TAG, "privider : " + provider);
         Location myLocation = locationManager.getLastKnownLocation(provider);
 
         if (myLocation != null) {
             double lat = myLocation.getLatitude();
             double lon = myLocation.getLongitude();
 
-            LatLng latLng = new LatLng(lat,lon);
+            LatLng latLng = new LatLng(lat, lon);
             mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         }
-
+        Ruta ruta = new Ruta("zrnkFtzfzLJGH?p@BFCh@eAhFkJnF}J_B_BCUJa@d@cAVuA@c@?YPu@w@WYIg@K_@@YFc@^E@KAYSgBiBcDwCcAy@");
         PolylineOptions polylineOptions = new PolylineOptions();
-        polylineOptions.add(new LatLng(-38.749173d,-72.617261d));
-        polylineOptions.add(new LatLng(-38.748679d,-72.616735d));
-
-        polylineOptions.add(new LatLng(-38.748926d,-72.616286d));
-        polylineOptions.add(new LatLng(-38.749085d,-72.615610d));
-
-        polylineOptions.add(new LatLng(-38.749152d,-72.615181d));
-        polylineOptions.add(new LatLng(-38.748709d,-72.614977d));
-
-        polylineOptions.add(new LatLng(-38.748282d,-72.614977d));
-        polylineOptions.add(new LatLng(-38.748023d,-72.615149d));
-
-        polylineOptions.add(new LatLng(-38.745939d,-72.613271d));
-        polylineOptions.add(new LatLng(-38.746424d,-72.611275d));
-        polylineOptions.color(Color.GREEN);
+        polylineOptions.addAll(ruta.getRoute());
+        polylineOptions.color(Color.BLUE);
+        polylineOptions.width(4);
+        polylineOptions.geodesic(true);
 
         mMap.addPolyline(polylineOptions);
-
     }
 }

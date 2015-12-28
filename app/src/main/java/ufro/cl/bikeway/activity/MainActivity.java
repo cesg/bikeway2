@@ -68,7 +68,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         if (requestCode == RC_SIGN_IN) {
             GoogleSignInResult result = Auth.GoogleSignInApi.getSignInResultFromIntent(data);
             if (result.isSuccess()) {
-                this.sessionManager.createSession("UserA", "SomeEmail");
+                String name = result.getSignInAccount().getDisplayName();
+                String email = result.getSignInAccount().getEmail();
+
+                this.sessionManager.createSession(name, email);
                 Intent homeIntent = new Intent(this, HomeActivity.class);
                 startActivity(homeIntent);
             }
