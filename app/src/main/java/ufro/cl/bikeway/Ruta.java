@@ -23,7 +23,7 @@ public class Ruta {
         this.overviewPolyline = overviewPolyline;
     }
 
-    public List<LatLng> getRoute() {
+    public List<LatLng> getPoints() {
         if (route == null) {
             this.route = PolyUtil.decode(this.overviewPolyline);
         }

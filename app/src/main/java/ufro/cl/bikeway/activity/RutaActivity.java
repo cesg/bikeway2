@@ -7,27 +7,20 @@ import android.graphics.Color;
 import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationManager;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.util.Log;
 
-import com.google.android.gms.common.ConnectionResult;
-import com.google.android.gms.common.GooglePlayServicesUtil;
-import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
-import com.google.maps.android.PolyUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import ufro.cl.bikeway.R;
@@ -96,11 +89,24 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
         }
         Ruta ruta = new Ruta("zrnkFtzfzLJGH?p@BFCh@eAhFkJnF}J_B_BCUJa@d@cAVuA@c@?YPu@w@WYIg@K_@@YFc@^E@KAYSgBiBcDwCcAy@");
         PolylineOptions polylineOptions = new PolylineOptions();
-        polylineOptions.addAll(ruta.getRoute());
+        polylineOptions.addAll(ruta.getPoints());
         polylineOptions.color(Color.BLUE);
         polylineOptions.width(4);
         polylineOptions.geodesic(true);
 
         mMap.addPolyline(polylineOptions);
+        fixZoom(ruta);
+    }
+
+    private void fixZoom(Ruta route) {
+        List<LatLng> points = route.getPoints(); // route is instance of PolylineOptions
+
+        LatLngBounds.Builder bc = new LatLngBounds.Builder();
+
+        for (LatLng item : points) {
+            bc.include(item);
+        }
+
+        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bc.build(), 50));
     }
 }
