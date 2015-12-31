@@ -1,14 +1,24 @@
-package ufro.cl.bikeway;
+package ufro.cl.bikeway.db;
 
+import com.activeandroid.Model;
+import com.activeandroid.annotation.Column;
+import com.activeandroid.annotation.Table;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.maps.android.PolyUtil;
 
 import java.util.List;
 
-public class Ruta {
+@Table(name = "rutas")
+public class Ruta  extends Model{
+    @Column(name = "overviewPolyne")
     private String overviewPolyline;
+
     private List<LatLng> route;
+
+    @Column(name = "distancia")
     private double distancia;
+
+    @Column(name = "tiempo")
     private double tiempo;
 
     public Ruta(String overviewPolyline) {

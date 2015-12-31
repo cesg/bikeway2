@@ -11,7 +11,6 @@ import android.location.LocationManager;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
-import android.support.v4.app.LoaderManager;
 import android.util.Log;
 import android.widget.Toast;
 
@@ -21,13 +20,12 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
-import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
 
 import ufro.cl.bikeway.R;
-import ufro.cl.bikeway.Ruta;
+import ufro.cl.bikeway.db.Ruta;
 
 public class RutaActivity extends FragmentActivity implements OnMapReadyCallback, LocationListener {
 
