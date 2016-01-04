@@ -8,17 +8,17 @@ import com.google.maps.android.PolyUtil;
 
 import java.util.List;
 
-@Table(name = "rutas")
-public class Ruta  extends Model{
-    @Column(name = "overviewPolyne")
+//@Table(name = "rutas")
+public class Ruta  /*extends Model*/{
+    //@Column(name = "overviewPolyne")
     private String overviewPolyline;
 
     private List<LatLng> route;
 
-    @Column(name = "distancia")
+    //@Column(name = "distancia")
     private double distancia;
 
-    @Column(name = "tiempo")
+    //@Column(name = "tiempo")
     private double tiempo;
 
     public Ruta(String overviewPolyline) {
