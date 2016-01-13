@@ -12,17 +12,15 @@
          location permissions for the 'MyLocation' functionality. 
     -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!--<uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />-->
-    <meta-data android:name="AA_DB_NAME" android:value="bikeway.db" />
-    <meta-data android:name="AA_DB_VERSION" android:value="5" />
 
+    <!-- <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" /> -->
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activity.MainActivity" >
+        <activity android:name=".activity.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -30,6 +28,16 @@
             </intent-filter>
         </activity>
         <activity android:name=".activity.HomeActivity" />
+
+        <meta-data
+            android:name="AA_DB_NAME"
+            android:value="bikeway.db" />
+        <meta-data
+            android:name="AA_DB_VERSION"
+            android:value="1" />
+        <meta-data
+            android:name="AA_MODELS"
+            android:value="ufro.cl.bikeway.db.Ruta" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -44,7 +52,8 @@
 
         <activity
             android:name=".activity.RutaActivity"
-            android:label="@string/title_activity_ruta"></activity>
+            android:label="@string/title_activity_ruta" />
+        <activity android:name=".activity.ListaRutas"></activity>
     </application>
 
 </manifest>

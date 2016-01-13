@@ -17,6 +17,9 @@ import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +28,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.List;
@@ -37,12 +41,31 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
     private GoogleMap mMap;
     public static final String TAG = RutaActivity.class.getSimpleName();
     private LocationManager locationManager;
+    private Ruta ruta;
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        long rutaID = getIntent().getExtras().getLong("ruta_id");
+        this.ruta = Ruta.load(Ruta.class, rutaID);
         setContentView(R.layout.activity_ruta);
 
+        TextView txtNombreRuta = (TextView) this.findViewById(R.id.textNombreRuta);
+        TextView txtDistancia = (TextView) findViewById(R.id.txtDistancia);
+        Button focoRuta = (Button) findViewById(R.id.btnFocoRuta);
+        focoRuta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                fixZoom(ruta);
+            }
+        });
+        txtNombreRuta.setText(ruta.getNombre());
+        txtDistancia.setText( ruta.getDistancia()/100 + " KM");
 
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
@@ -52,9 +75,12 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             return;
         }
+
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         boolean isGPSEnable = locationManager.isProviderEnabled(LocationManager.GPS_PROVIDER);
         boolean isNetEnable = locationManager.isProviderEnabled(LocationManager.NETWORK_PROVIDER);
+
+
         if (!isGPSEnable && !isNetEnable) {
 
             AlertDialog.Builder builder = new AlertDialog.Builder(this);
@@ -102,11 +128,19 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
             // for ActivityCompat#requestPermissions for more details.
             return;
         }
+        Log.w(TAG, "ruta way_points : "+ ruta.getOverviewPolyline());
+        // Agrega el find me
         mMap.setMyLocationEnabled(true);
+
+        // Tipo de mapa
         mMap.setMapType(GoogleMap.MAP_TYPE_NORMAL);
 
+        // Criterios para selecionar proveedor de ubicación
         Criteria criteria = new Criteria();
+
         String provider = locationManager.getBestProvider(criteria, true);
+
+        // Mi última posición conocida
         Location myLocation = locationManager.getLastKnownLocation(provider);
 
         if (myLocation != null) {
@@ -118,7 +152,6 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
 
             mMap.animateCamera(CameraUpdateFactory.zoomTo(14));
         }
-        Ruta ruta = new Ruta("zrnkFtzfzLJGH?p@BFCh@eAhFkJnF}J_B_BCUJa@d@cAVuA@c@?YPu@w@WYIg@K_@@YFc@^E@KAYSgBiBcDwCcAy@");
         PolylineOptions polylineOptions = new PolylineOptions();
         polylineOptions.addAll(ruta.getPoints());
         polylineOptions.color(Color.BLUE);
@@ -130,15 +163,18 @@ public class RutaActivity extends FragmentActivity implements OnMapReadyCallback
     }
 
     private void fixZoom(Ruta route) {
-        List<LatLng> points = route.getPoints(); // route is instance of PolylineOptions
+        final List<LatLng> points = route.getPoints();
+        mMap.setOnMapLoadedCallback(new GoogleMap.OnMapLoadedCallback() {
+            @Override
+            public void onMapLoaded() {
+                LatLngBounds.Builder bc = new LatLngBounds.Builder();
 
-        LatLngBounds.Builder bc = new LatLngBounds.Builder();
-
-        for (LatLng item : points) {
-            bc.include(item);
-        }
-
-        mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bc.build(), 50));
+                for (LatLng item : points) {
+                    bc.include(item);
+                }
+                mMap.moveCamera(CameraUpdateFactory.newLatLngBounds(bc.build(), 15));
+            }
+        });
     }
 
     @Override

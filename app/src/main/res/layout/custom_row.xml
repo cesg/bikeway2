@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal" android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:weightSum="1">
+
+    <ImageView
+        android:layout_width="116dp"
+        android:layout_height="102dp"
+        android:id="@+id/imageView"
+        android:src="@drawable/map_icon"
+        android:layout_margin="5dp" />
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="102dp"
+        android:layout_weight="0">
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="36dp"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/rutaNombre"
+                android:layout_margin="5dp"
+                android:layout_column="0"
+                android:layout_span="100" />
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textAppearance="?android:attr/textAppearanceLarge"
+                android:text="Large Text"
+                android:id="@+id/rutaDistancia"
+                android:layout_margin="5dp"
+                android:layout_column="0"
+                android:layout_weight="100" />
+        </TableRow>
+    </TableLayout>
+
+</LinearLayout>

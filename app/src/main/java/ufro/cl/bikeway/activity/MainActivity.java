@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
+import com.activeandroid.ActiveAndroid;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.auth.api.signin.GoogleSignInResult;
@@ -26,7 +27,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onStart() {
         super.onStart();
         if (sessionManager != null && sessionManager.isUserLoggedIn()) {
-            Intent home = new Intent(this, HomeActivity.class);
+            Intent home = new Intent(this, ListaRutas.class);
             startActivity(home);
         }
     }
@@ -49,7 +50,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
 
         findViewById(R.id.sign_in_button).setOnClickListener(this);
-        //findViewById(R.id.button).setOnClickListener(this);
+        ActiveAndroid.initialize(this);
     }
 
     @Override
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 String email = result.getSignInAccount().getEmail();
 
                 this.sessionManager.createSession(name, email);
-                Intent homeIntent = new Intent(this, HomeActivity.class);
+                Intent homeIntent = new Intent(this, ListaRutas.class);
                 startActivity(homeIntent);
             }
         }

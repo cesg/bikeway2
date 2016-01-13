@@ -3,7 +3,8 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:paddingLeft="16dp"
-    android:paddingRight="16dp">
+    android:paddingRight="16dp"
+    android:background="#ecf0f1">
 
     <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:map="http://schemas.android.com/apk/res-auto"
@@ -14,43 +15,58 @@
         android:layout_height="362dp"
         tools:context=".activity.RutaActivity" />
 
-    <TableLayout
+    <GridLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="82dp"
+        android:columnCount="2"
+        android:rowCount="3"
+        android:layout_marginTop="10dp">
 
         <TextView
-            android:layout_width="133dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="Nombre de Ruta"
-            android:id="@+id/textView2" />
+            android:text="Nombre"
+            android:id="@+id/textView"
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"
+            android:textSize="22dp" />
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/textNombreRuta"
+            android:layout_marginLeft="50dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="22dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/distancia"
-                android:id="@+id/textView"
-                android:layout_column="0" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Distancia"
+            android:id="@+id/textView3"
+            android:textStyle="bold"
+            android:textSize="22dp" />
 
-            <Space
-                android:layout_width="20px"
-                android:layout_height="20px"
-                android:layout_column="9" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Medium Text"
+            android:id="@+id/txtDistancia"
+            android:layout_marginLeft="50dp"
+            android:textSize="22dp" />
+    </GridLayout>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textAppearance="?android:attr/textAppearanceMedium"
-                android:text="@string/_50_metros"
-                android:id="@+id/textView3"
-                android:layout_column="28" />
-
-        </TableRow>
-    </TableLayout>
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/flat_selector"
+        android:textColor="@android:color/white"
+        android:text="@string/centrar_ruta"
+        android:id="@+id/btnFocoRuta" />
 
 </LinearLayout>

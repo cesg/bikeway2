@@ -10,4 +10,6 @@
     <string name="distancia">Distancia:</string>
     <string name="_50_metros">50 Metros</string>
     <string name="ver_ruta">Ver Ruta</string>
+    <string name="title_activity_lista_ruta">ListaRuta</string>
+    <string name="centrar_ruta">Centrar ruta</string>
 </resources>
